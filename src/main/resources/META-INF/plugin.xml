@@ -1,18 +1,58 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.xepozz.gitattributesplugin</id>
-    <name>gitattributes-plugin</name>
-    <vendor>xepozz</vendor>
+    <id>com.github.xepozz.gitattributes</id>
+    <name>.gitattributes support</name>
+    <vendor email="xepozz@list.ru" url="https://github.com/xepozz">Dmitrii Derepko (@xepozz)</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.xepozz.gitattributesplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
+        <fileType
+                name="Git Attributes File"
+                implementationClass="com.github.xepozz.gitattributes.language.GitattributesFileType"
+                fieldName="INSTANCE"
+                language="Gitattributes"
+                extensions=".gitattributes"
+                fileNamesCaseInsensitive=".gitattributes"
+        />
+        <lang.parserDefinition
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.language.parser.GitattributesParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.language.GitattributesSyntaxHighlighterFactory"/>
+        <annotator
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.language.GitattributesAnnotator"/>
+        <multiHostInjector
+                implementation="com.github.xepozz.gitattributes.language.GitattributesLanguageInjector"/>
 
-    <applicationListeners>
-        <listener class="com.github.xepozz.gitattributesplugin.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+<!--        <lang.psiStructureViewFactory-->
+<!--                language="Gitattributes"-->
+<!--                implementationClass="com.github.xepozz.gitattributes.ide.structureView.GitattributesStructureViewFactory"/>-->
+<!--        <lang.documentationProvider-->
+<!--                language="Gitattributes"-->
+<!--                implementationClass="com.github.xepozz.gitattributes.ide.documentation.GitattributesDocumentationProvider"/>-->
+<!--        <runLineMarkerContributor-->
+<!--                language="Gitattributes"-->
+<!--                implementationClass="com.github.xepozz.gitattributes.ide.GitattributesRunCommandMarkerContributor"/>-->
+<!--        <lang.foldingBuilder-->
+<!--                language="Gitattributes"-->
+<!--                implementationClass="com.github.xepozz.gitattributes.ide.CronScheduleFoldingBuilder"/>-->
+        <lang.commenter
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.ide.GitattributesCommenter"/>
+<!--        <localInspection-->
+<!--                language="Gitattributes" enabledByDefault="true" level="ERROR"-->
+<!--                groupName="Gitattributes schedule" displayName="Gitattributes schedule"-->
+<!--                implementationClass="com.github.xepozz.gitattributes.ide.inspections.GitattributesScheduleTimeRangeInspection"/>-->
+
+<!--        <intentionAction>-->
+<!--            <language>Gitattributes</language>-->
+<!--            <className>com.github.xepozz.gitattributes.ide.actions.GitattributesGuruIntention</className>-->
+<!--            <category>Gitattributes intentions</category>-->
+<!--        </intentionAction>-->
+    </extensions>
 </idea-plugin>
