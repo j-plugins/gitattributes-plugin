@@ -14,7 +14,7 @@
                 implementationClass="com.github.xepozz.gitattributes.language.GitattributesFileType"
                 fieldName="INSTANCE"
                 language="Gitattributes"
-                extensions=".gitattributes"
+                extensions="gitattributes"
                 fileNamesCaseInsensitive=".gitattributes"
         />
         <lang.parserDefinition
