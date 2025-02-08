@@ -44,6 +44,10 @@
         <lang.commenter
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.ide.AttributesCommenter"/>
+        <completion.contributor
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.ide.completion.AttributesCompletionContributor"/>
+        <!--        <localInspection-->
 <!--                language="Gitattributes" enabledByDefault="true" level="ERROR"-->
 <!--                groupName="Gitattributes schedule" displayName="Gitattributes schedule"-->
 <!--                implementationClass="com.github.xepozz.gitattributes.ide.inspections.AttributesScheduleTimeRangeInspection"/>-->
