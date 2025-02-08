@@ -51,7 +51,7 @@ class AttributesCompletionContributor : CompletionContributor(), DumbAware {
                     val leafElement = parameters.position
                     val attribute = leafElement.parent as? AttributesAttribute ?: return
                     val count = attribute.children.count()
-                    println("leaft: $leafElement attr: $attribute, count: $count, text ${leafElement.prevSibling?.text}")
+//                    println("leaft: $leafElement attr: $attribute, count: $count, text ${leafElement.prevSibling?.text}")
                     if (count == 1 || leafElement.prevSibling?.text != "=") {
                         keywords.forEach { keyword ->
                             result.addElement(
