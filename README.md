@@ -8,7 +8,7 @@
 
 ## .gitattributes support
 
-Crontab syntax support:
+.gitattributes syntax support:
 
 - syntax highlighting
 - keywords autocompletion (soon)
