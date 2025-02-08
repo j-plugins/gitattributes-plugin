@@ -2,6 +2,10 @@
 
 # .gitattributes Changelog
 
+## Unreleased
+
+- feat: basic attributes autocompletion
+
 ## [2025.0.1] - 2025-02-0
 
 - feat: token highlighting

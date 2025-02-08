@@ -1,6 +1,21 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.utils.asPath
+import kotlin.io.path.absolutePathString
+
+fun prop(name: String) = providers.gradleProperty(name).get()
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath("com.guardsquare:proguard-gradle:7.6.1")
+    }
+}
 
 plugins {
     id("java") // Java support
@@ -137,6 +152,83 @@ tasks {
 
     publishPlugin {
         dependsOn(patchChangelog)
+    }
+
+    // https://plugins.jetbrains.com/docs/marketplace/obfuscate-the-plugin.html#proguard
+    // see https://www.guardsquare.com/manual/setup/gradle
+    register<proguard.gradle.ProGuardTask>("proguard") {
+        dependsOn(buildPlugin)
+        dependsOn(instrumentedJar)
+        verbose()
+
+        val javaHome = System.getProperty("java.home")
+        File("$javaHome/jmods/").listFiles().forEach { libraryjars(it.absolutePath) }
+
+        // Use the jar task output as a input jar. This will automatically add the necessary task dependency.
+        val pluginName = rootProject.name + "-" + prop("pluginVersion")
+        val inputDir = "build/libs/"
+        val outputDir = "build/distributions/"
+
+        injars("$inputDir$pluginName-instrumented.jar")
+        outjars("$outputDir$pluginName-obfuscated.jar")
+
+        libraryjars(configurations.compileClasspath.get())
+
+        dontshrink()
+        dontoptimize()
+//        dontpreverify()
+//        dontskipnonpubliclibraryclassmembers()
+
+        adaptclassstrings("**.xml")
+        adaptresourcefilecontents("**.xml")
+
+        // Allow methods with the same signature, except for the return type,
+        // to get the same obfuscation name.
+        overloadaggressively()
+
+        // Put all obfuscated classes into the nameless root package.
+        repackageclasses("")
+        dontwarn()
+
+        printmapping("$outputDir$pluginName-ProGuard-ChangeLog.txt")
+        target(prop("pluginVersion"))
+
+        adaptresourcefilenames()
+        optimizationpasses(9)
+        allowaccessmodification()
+//        mergeinterfacesaggressively()
+
+        keepattributes("Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod")
+
+        keep(
+            """
+            class * implements com.intellij.openapi.components.PersistentStateComponent {*;}
+            """.trimIndent()
+        )
+
+        keepclassmembers(
+            """
+            class * {public static ** INSTANCE;}
+            """.trimIndent()
+        )
+        keepclassmembers(
+            """
+            enum * {
+                <fields>;
+            }
+            """.trimIndent()
+        )
+        keepclassmembers(
+            """
+            enum * {
+                public static **[] values();
+                public static ** valueOf(java.lang.String);
+            }
+            """.trimIndent()
+        )
+        keep("class com.intellij.util.* {*;}")
+
+        println("Output directory: ${layout.projectDirectory.dir(outputDir).asPath.absolutePathString()}:1")
     }
 }
 
