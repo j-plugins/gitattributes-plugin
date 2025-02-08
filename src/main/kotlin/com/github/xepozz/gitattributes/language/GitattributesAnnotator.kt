@@ -1,9 +1,6 @@
 package com.github.xepozz.gitattributes.language
 
-//import com.github.xepozz.gitattributes.language.psi.GitattributesTimePointer
-//import com.github.xepozz.gitattributes.language.psi.GitattributesVariableName
-//import com.github.xepozz.gitattributes.language.psi.GitattributesVariableValue
-import com.github.xepozz.gitattributes.language.psi.GitattributesParameter
+import com.github.xepozz.gitattributes.language.psi.GitattributesAttribute
 import com.github.xepozz.gitattributes.language.psi.GitattributesPattern
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
@@ -22,7 +19,7 @@ class GitattributesAnnotator : Annotator {
                     .create()
             }
 
-            is GitattributesParameter -> {
+            is GitattributesAttribute -> {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element.textRange)
                     .textAttributes(PARAMETERS_HIGHLIGHT)

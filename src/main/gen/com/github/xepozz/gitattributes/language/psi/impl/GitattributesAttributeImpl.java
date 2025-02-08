@@ -8,35 +8,22 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.xepozz.gitattributes.language.psi.GitattributesTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.gitattributes.language.psi.*;
 
-public class GitattributesUnaryDefinitionImpl extends ASTWrapperPsiElement implements GitattributesUnaryDefinition {
+public class GitattributesAttributeImpl extends AttributesAttributeBaseImpl implements GitattributesAttribute {
 
-  public GitattributesUnaryDefinitionImpl(@NotNull ASTNode node) {
+  public GitattributesAttributeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GitattributesVisitor visitor) {
-    visitor.visitUnaryDefinition(this);
+    visitor.visitAttribute(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof GitattributesVisitor) accept((GitattributesVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public GitattributesAttributeList getAttributeList() {
-    return findNotNullChildByClass(GitattributesAttributeList.class);
-  }
-
-  @Override
-  @NotNull
-  public GitattributesPattern getPattern() {
-    return findNotNullChildByClass(GitattributesPattern.class);
   }
 
 }

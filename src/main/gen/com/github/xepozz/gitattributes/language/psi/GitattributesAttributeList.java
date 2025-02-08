@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GitattributesUnaryDefinition extends PsiElement {
+public interface GitattributesAttributeList extends PsiElement {
 
   @NotNull
-  GitattributesAttributeList getAttributeList();
-
-  @NotNull
-  GitattributesPattern getPattern();
+  List<GitattributesAttribute> getAttributeList();
 
 }

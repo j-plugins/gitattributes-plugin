@@ -4,6 +4,7 @@ package com.github.xepozz.gitattributes.language.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.NavigatablePsiElement;
 
 public class GitattributesVisitor extends PsiElementVisitor {
 
@@ -11,11 +12,15 @@ public class GitattributesVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitDefinition(@NotNull GitattributesDefinition o) {
+  public void visitAttribute(@NotNull GitattributesAttribute o) {
+    visitNavigatablePsiElement(o);
+  }
+
+  public void visitAttributeList(@NotNull GitattributesAttributeList o) {
     visitPsiElement(o);
   }
 
-  public void visitParameter(@NotNull GitattributesParameter o) {
+  public void visitDefinition(@NotNull GitattributesDefinition o) {
     visitPsiElement(o);
   }
 
@@ -25,6 +30,10 @@ public class GitattributesVisitor extends PsiElementVisitor {
 
   public void visitUnaryDefinition(@NotNull GitattributesUnaryDefinition o) {
     visitPsiElement(o);
+  }
+
+  public void visitNavigatablePsiElement(@NotNull NavigatablePsiElement o) {
+    visitElement(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

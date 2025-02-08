@@ -20,10 +20,15 @@ gitattributesFile ::= item_*
 private item_ ::= (definition | COMMENT | EOL)
 
 definition ::= unary_definition
-unary_definition ::= pattern parameter+
+unary_definition ::= pattern attributeList
 pattern ::= TEXT
-parameter ::= TEXT
-//
+attributeList ::= attribute+
+attribute ::= DASH? TEXT (EQUALS_SIGN TEXT)?
+{
+    implements=["com.intellij.psi.NavigatablePsiElement"]
+    extends="com.github.xepozz.gitattributes.language.psi.impl.AttributesAttributeBaseImpl"
+}
+
 //cronExpression ::= (SCHEDULE COMMAND)
 //{
 //    pin=1
@@ -69,7 +74,7 @@ parameter ::= TEXT
 //COMMAND ::= CONTENT
 //{
 //    implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiLanguageInjectionHost"]
-//    extends="com.github.xepozz.gitattributes.language.psi.impl.GitattributesCommandBaseImpl"
+//    extends="com.github.xepozz.gitattributes.language.psi.impl.GitattributesAttributeBaseImplpl"
 //}
 
 COMMENT ::= SINGLE_COMMENT

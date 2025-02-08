@@ -11,20 +11,26 @@ import static com.github.xepozz.gitattributes.language.psi.GitattributesTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.gitattributes.language.psi.*;
 
-public class GitattributesParameterImpl extends ASTWrapperPsiElement implements GitattributesParameter {
+public class GitattributesAttributeListImpl extends ASTWrapperPsiElement implements GitattributesAttributeList {
 
-  public GitattributesParameterImpl(@NotNull ASTNode node) {
+  public GitattributesAttributeListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GitattributesVisitor visitor) {
-    visitor.visitParameter(this);
+    visitor.visitAttributeList(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof GitattributesVisitor) accept((GitattributesVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<GitattributesAttribute> getAttributeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GitattributesAttribute.class);
   }
 
 }

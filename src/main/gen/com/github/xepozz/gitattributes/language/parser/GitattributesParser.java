@@ -48,6 +48,61 @@ public class GitattributesParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // DASH? TEXT (EQUALS_SIGN TEXT)?
+  public static boolean attribute(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute")) return false;
+    if (!nextTokenIs(b, "<attribute>", DASH, TEXT)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE, "<attribute>");
+    r = attribute_0(b, l + 1);
+    r = r && consumeToken(b, TEXT);
+    r = r && attribute_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // DASH?
+  private static boolean attribute_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_0")) return false;
+    consumeToken(b, DASH);
+    return true;
+  }
+
+  // (EQUALS_SIGN TEXT)?
+  private static boolean attribute_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_2")) return false;
+    attribute_2_0(b, l + 1);
+    return true;
+  }
+
+  // EQUALS_SIGN TEXT
+  private static boolean attribute_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, EQUALS_SIGN, TEXT);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // attribute+
+  public static boolean attributeList(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attributeList")) return false;
+    if (!nextTokenIs(b, "<attribute list>", DASH, TEXT)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_LIST, "<attribute list>");
+    r = attribute(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!attribute(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "attributeList", c)) break;
+    }
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // unary_definition
   public static boolean definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "definition")) return false;
@@ -84,18 +139,6 @@ public class GitattributesParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // TEXT
-  public static boolean parameter(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "parameter")) return false;
-    if (!nextTokenIs(b, TEXT)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, TEXT);
-    exit_section_(b, m, PARAMETER, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // TEXT
   public static boolean pattern(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "pattern")) return false;
     if (!nextTokenIs(b, TEXT)) return false;
@@ -107,30 +150,15 @@ public class GitattributesParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // pattern parameter+
+  // pattern attributeList
   public static boolean unary_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "unary_definition")) return false;
     if (!nextTokenIs(b, TEXT)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = pattern(b, l + 1);
-    r = r && unary_definition_1(b, l + 1);
+    r = r && attributeList(b, l + 1);
     exit_section_(b, m, UNARY_DEFINITION, r);
-    return r;
-  }
-
-  // parameter+
-  private static boolean unary_definition_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "unary_definition_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = parameter(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!parameter(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "unary_definition_1", c)) break;
-    }
-    exit_section_(b, m, null, r);
     return r;
   }
 
