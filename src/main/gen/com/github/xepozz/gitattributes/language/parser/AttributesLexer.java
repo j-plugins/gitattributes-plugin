@@ -97,10 +97,11 @@ class AttributesLexer implements FlexLexer {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\3\0\1\1\1\2\1\3\1\4\1\5\1\1\1\6"+
-    "\1\7\2\6\1\10\1\11\1\5\1\0\1\5\1\1";
+    "\1\7\1\6\1\4\1\10\1\11\1\5\1\0\1\5"+
+    "\1\6\1\1";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[19];
+    int [] result = new int[20];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -127,10 +128,10 @@ class AttributesLexer implements FlexLexer {
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\11\0\22\0\33\0\44\0\55\0\66\0\77"+
     "\0\110\0\121\0\132\0\143\0\154\0\66\0\66\0\165"+
-    "\0\176\0\207\0\220";
+    "\0\176\0\207\0\154\0\220";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[19];
+    int [] result = new int[20];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -159,9 +160,9 @@ class AttributesLexer implements FlexLexer {
     "\1\4\4\0\3\4\1\11\1\0\1\5\11\0\1\6"+
     "\1\0\1\6\15\0\1\10\1\20\1\21\2\20\3\10"+
     "\1\22\10\4\1\11\1\12\4\0\3\12\1\14\1\0"+
-    "\1\13\7\0\10\12\1\14\1\15\4\0\1\15\2\0"+
-    "\1\15\2\20\1\21\6\20\5\0\1\20\3\0\2\10"+
-    "\1\23\5\10\1\22\1\4\4\0\1\10\2\4\1\11";
+    "\1\13\7\0\10\12\1\14\1\23\4\0\2\23\1\0"+
+    "\1\23\2\20\1\21\6\20\5\0\1\20\3\0\2\10"+
+    "\1\24\5\10\1\22\1\4\4\0\1\10\2\4\1\11";
 
   private static int [] zzUnpacktrans() {
     int [] result = new int[153];
@@ -202,10 +203,10 @@ class AttributesLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\3\1\1\11\6\1\2\11\1\1\1\0\2\1";
+    "\3\0\3\1\1\11\6\1\2\11\1\1\1\0\3\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[19];
+    int [] result = new int[20];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
