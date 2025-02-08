@@ -38,7 +38,7 @@ TEXT=(\\\s|[^\s])+
 <ATTRIBUTES> {
     {DASH}                                       { return AttributesTypes.DASH; }
     {EQUALS_SIGN}                                { return AttributesTypes.EQUALS_SIGN; }
-    [^\-\s\=\n][^\s\=\n]+                        { return AttributesTypes.TEXT; }
+    [^\-\s\=\n][^\s\=\n]*                        { return AttributesTypes.TEXT; }
 }
 
 
