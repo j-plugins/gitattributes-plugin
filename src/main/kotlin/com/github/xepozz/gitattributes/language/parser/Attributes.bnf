@@ -1,0 +1,31 @@
+{
+  parserClass="com.github.xepozz.gitattributes.language.parser.AttributesParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Attributes"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.xepozz.gitattributes.language.psi"
+  psiImplPackage="com.github.xepozz.gitattributes.language.psi.impl"
+
+  elementTypeHolderClass="com.github.xepozz.gitattributes.language.psi.AttributesTypes"
+  elementTypeClass="com.github.xepozz.gitattributes.language.psi.AttributesElementType"
+  tokenTypeClass="com.github.xepozz.gitattributes.language.psi.AttributesTokenType"
+
+//  psiImplUtilClass="com.github.xepozz.gitattributes.language.psi.impl.AttributesImplUtil"
+}
+
+attributesFile ::= item_*
+
+private item_ ::= (definition | COMMENT | EOL)
+
+COMMENT ::= SINGLE_COMMENT
+
+definition ::= pattern attributeList
+pattern ::= TEXT
+attributeList ::= attribute+
+attribute ::= DASH? TEXT (EQUALS_SIGN TEXT)?
+{
+    implements=["com.intellij.psi.NavigatablePsiElement"]
+    extends="com.github.xepozz.gitattributes.language.psi.impl.AttributesAttributeBaseImpl"
+}

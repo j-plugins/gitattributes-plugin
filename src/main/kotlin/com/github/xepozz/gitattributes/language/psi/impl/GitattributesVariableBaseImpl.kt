@@ -1,6 +1,6 @@
 //package com.github.xepozz.gitattributes.language.psi.impl
 //
-//import com.github.xepozz.gitattributes.language.psi.GitattributesVariableDefinition
+//import com.github.xepozz.gitattributes.language.psi.AttributesVariableDefinition
 //import com.intellij.extapi.psi.ASTWrapperPsiElement
 //import com.intellij.icons.AllIcons
 //import com.intellij.lang.ASTNode

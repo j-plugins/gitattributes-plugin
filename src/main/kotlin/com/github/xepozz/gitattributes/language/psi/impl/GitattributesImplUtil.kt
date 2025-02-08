@@ -1,6 +1,6 @@
 //package com.github.xepozz.gitattributes.language.psi.impl
 //
-//import com.github.xepozz.gitattributes.language.psi.GitattributesTimeRange
+//import com.github.xepozz.gitattributes.language.psi.AttributesTimeRange
 //
 //object GitattributesImplUtil {
 //    @JvmStatic
