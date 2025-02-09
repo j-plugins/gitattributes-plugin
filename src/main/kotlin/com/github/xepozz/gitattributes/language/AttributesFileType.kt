@@ -4,9 +4,9 @@ import com.github.xepozz.gitattributes.AttributesIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
 
 class AttributesFileType private constructor() : LanguageFileType(AttributesLanguage.INSTANCE) {
-    override fun getName() = "Gitattributes File"
+    override fun getName() = "Git Attributes File"
 
-    override fun getDescription() = "Gitattributes language file"
+    override fun getDescription() = "Git Attributes language file"
 
     override fun getDefaultExtension() = "gitattributes"
 

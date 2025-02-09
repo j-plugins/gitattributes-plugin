@@ -6,5 +6,5 @@ import com.intellij.psi.FileViewProvider
 class AttributesFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, AttributesLanguage.INSTANCE) {
     override fun getFileType() = AttributesFileType.INSTANCE
 
-    override fun toString() = "Gitattributes File"
+    override fun toString() = "Git Attributes File"
 }
