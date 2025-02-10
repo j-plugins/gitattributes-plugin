@@ -4,6 +4,7 @@ import com.intellij.lang.Language
 
 class AttributesLanguage : Language("Gitattributes") {
     companion object {
+        @JvmStatic
         val INSTANCE = AttributesLanguage();
     }
 }

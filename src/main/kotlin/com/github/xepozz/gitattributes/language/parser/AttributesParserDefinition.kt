@@ -30,6 +30,7 @@ internal class AttributesParserDefinition : ParserDefinition {
     override fun createElement(node: ASTNode): PsiElement = AttributesTypes.Factory.createElement(node)
 
     companion object {
+        @JvmStatic
         val FILE = IFileElementType(AttributesLanguage.INSTANCE)
     }
 }
