@@ -2,7 +2,9 @@
 
 # .gitattributes Changelog
 
-## Unreleased
+## [Unreleased]
+
+## [2025.0.4] - 2025-02-12
 
 - feat: basic attributes autocompletion
 - feat: config file names missmatch
