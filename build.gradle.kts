@@ -2,6 +2,8 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.utils.asPath
+import java.nio.charset.Charset
+import java.util.Properties
 import kotlin.io.path.absolutePathString
 
 fun prop(name: String) = providers.gradleProperty(name).get()
@@ -16,6 +18,8 @@ buildscript {
         classpath("com.guardsquare:proguard-gradle:7.6.1")
     }
 }
+val envProperties =  Properties()
+envProperties.load(file(".env").reader(Charset.forName("UTF-8")))
 
 plugins {
     id("java") // Java support
@@ -114,7 +118,7 @@ intellijPlatform {
     }
 
     publishing {
-        token = providers.environmentVariable("PUBLISH_TOKEN")
+        token = provider { envProperties["PUBLISH_TOKEN"] as String }
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel

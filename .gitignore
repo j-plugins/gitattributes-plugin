@@ -2,5 +2,7 @@
 .idea
 .intellijPlatform
 .qodana
+.cert
+.env
 build
 .kotlin
