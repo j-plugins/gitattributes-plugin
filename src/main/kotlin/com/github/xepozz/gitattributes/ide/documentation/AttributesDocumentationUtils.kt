@@ -1,4 +1,4 @@
-package com.github.xepozz.crontab.ide.documentation
+package com.github.xepozz.gitattributes.ide.documentation
 
 import com.github.xepozz.gitattributes.language.psi.AttributesTypes
 import com.intellij.psi.PsiComment
