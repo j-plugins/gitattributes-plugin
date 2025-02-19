@@ -11,8 +11,8 @@
 .gitattributes syntax support:
 
 - syntax highlighting
-- keywords autocompletion (soon)
-- patterns matching (soon)
+- keywords autocompletion
+- patterns matching
 - rules inspections (soon)
 
 ## Donation

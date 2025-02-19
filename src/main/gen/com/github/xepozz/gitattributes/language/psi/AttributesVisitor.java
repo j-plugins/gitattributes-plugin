@@ -25,7 +25,7 @@ public class AttributesVisitor extends PsiElementVisitor {
   }
 
   public void visitPattern(@NotNull AttributesPattern o) {
-    visitPsiElement(o);
+    visitNavigatablePsiElement(o);
   }
 
   public void visitNavigatablePsiElement(@NotNull NavigatablePsiElement o) {

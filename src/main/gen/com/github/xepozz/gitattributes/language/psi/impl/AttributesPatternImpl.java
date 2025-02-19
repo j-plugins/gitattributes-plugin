@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.xepozz.gitattributes.language.psi.AttributesTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.gitattributes.language.psi.*;
+import com.intellij.psi.PsiReference;
 
-public class AttributesPatternImpl extends ASTWrapperPsiElement implements AttributesPattern {
+public class AttributesPatternImpl extends AttributesPatternBaseImpl implements AttributesPattern {
 
   public AttributesPatternImpl(@NotNull ASTNode node) {
     super(node);
@@ -25,6 +25,11 @@ public class AttributesPatternImpl extends ASTWrapperPsiElement implements Attri
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof AttributesVisitor) accept((AttributesVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  public @NotNull PsiReference @NotNull [] getReferences() {
+    return AttributesPsiImplUtil.getReferences(this);
   }
 
 }

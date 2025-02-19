@@ -12,7 +12,7 @@
   elementTypeClass="com.github.xepozz.gitattributes.language.psi.AttributesElementType"
   tokenTypeClass="com.github.xepozz.gitattributes.language.psi.AttributesTokenType"
 
-//  psiImplUtilClass="com.github.xepozz.gitattributes.language.psi.impl.AttributesImplUtil"
+  psiImplUtilClass="com.github.xepozz.gitattributes.language.psi.impl.AttributesPsiImplUtil"
 }
 
 attributesFile ::= item_*
@@ -23,6 +23,11 @@ COMMENT ::= SINGLE_COMMENT
 
 definition ::= pattern attributeList
 pattern ::= TEXT
+{
+    implements=["com.intellij.psi.NavigatablePsiElement"]
+    extends="com.github.xepozz.gitattributes.language.psi.impl.AttributesPatternBaseImpl"
+    methods=[getReferences]
+}
 attributeList ::= attribute+
 attribute ::= DASH? TEXT (EQUALS_SIGN TEXT)?
 {

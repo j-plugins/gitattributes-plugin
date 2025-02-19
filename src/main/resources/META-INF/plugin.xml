@@ -15,8 +15,7 @@
                 fieldName="INSTANCE"
                 language="Gitattributes"
                 extensions="gitattributes"
-                fileNamesCaseInsensitive=".gitattributes"
-        />
+                fileNamesCaseInsensitive=".gitattributes"/>
         <lang.parserDefinition
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.language.parser.AttributesParserDefinition"/>
@@ -29,33 +28,36 @@
         <multiHostInjector
                 implementation="com.github.xepozz.gitattributes.language.AttributesLanguageInjector"/>
 
-<!--        <lang.psiStructureViewFactory-->
-<!--                language="Gitattributes"-->
-<!--                implementationClass="com.github.xepozz.gitattributes.ide.structureView.AttributesStructureViewFactory"/>-->
-<!--        <lang.documentationProvider-->
-<!--                language="Gitattributes"-->
-<!--                implementationClass="com.github.xepozz.gitattributes.ide.documentation.AttributesDocumentationProvider"/>-->
-<!--        <runLineMarkerContributor-->
-<!--                language="Gitattributes"-->
-<!--                implementationClass="com.github.xepozz.gitattributes.ide.AttributesRunCommandMarkerContributor"/>-->
-<!--        <lang.foldingBuilder-->
-<!--                language="Gitattributes"-->
-<!--                implementationClass="com.github.xepozz.gitattributes.ide.CronScheduleFoldingBuilder"/>-->
+        <!--        <lang.psiStructureViewFactory-->
+        <!--                language="Gitattributes"-->
+        <!--                implementationClass="com.github.xepozz.gitattributes.ide.structureView.AttributesStructureViewFactory"/>-->
+        <!--        <lang.documentationProvider-->
+        <!--                language="Gitattributes"-->
+        <!--                implementationClass="com.github.xepozz.gitattributes.ide.documentation.AttributesDocumentationProvider"/>-->
+        <!--        <runLineMarkerContributor-->
+        <!--                language="Gitattributes"-->
+        <!--                implementationClass="com.github.xepozz.gitattributes.ide.AttributesRunCommandMarkerContributor"/>-->
+        <!--        <lang.foldingBuilder-->
+        <!--                language="Gitattributes"-->
+        <!--                implementationClass="com.github.xepozz.gitattributes.ide.CronScheduleFoldingBuilder"/>-->
         <lang.commenter
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.ide.AttributesCommenter"/>
         <completion.contributor
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.ide.completion.AttributesCompletionContributor"/>
+        <psi.referenceContributor
+                language="Gitattributes"
+                implementation="com.github.xepozz.gitattributes.ide.reference.AttributesReferenceContributor"/>
         <!--        <localInspection-->
-<!--                language="Gitattributes" enabledByDefault="true" level="ERROR"-->
-<!--                groupName="Gitattributes schedule" displayName="Gitattributes schedule"-->
-<!--                implementationClass="com.github.xepozz.gitattributes.ide.inspections.AttributesScheduleTimeRangeInspection"/>-->
+        <!--                language="Gitattributes" enabledByDefault="true" level="ERROR"-->
+        <!--                groupName="Gitattributes schedule" displayName="Gitattributes schedule"-->
+        <!--                implementationClass="com.github.xepozz.gitattributes.ide.inspections.AttributesScheduleTimeRangeInspection"/>-->
 
-<!--        <intentionAction>-->
-<!--            <language>Gitattributes</language>-->
-<!--            <className>com.github.xepozz.gitattributes.ide.actions.AttributesGuruIntention</className>-->
-<!--            <category>Gitattributes intentions</category>-->
-<!--        </intentionAction>-->
+        <!--        <intentionAction>-->
+        <!--            <language>Gitattributes</language>-->
+        <!--            <className>com.github.xepozz.gitattributes.ide.actions.AttributesGuruIntention</className>-->
+        <!--            <category>Gitattributes intentions</category>-->
+        <!--        </intentionAction>-->
     </extensions>
 </idea-plugin>
