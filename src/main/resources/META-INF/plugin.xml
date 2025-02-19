@@ -34,12 +34,9 @@
         <!--        <lang.documentationProvider-->
         <!--                language="Gitattributes"-->
         <!--                implementationClass="com.github.xepozz.gitattributes.ide.documentation.AttributesDocumentationProvider"/>-->
-        <!--        <runLineMarkerContributor-->
-        <!--                language="Gitattributes"-->
-        <!--                implementationClass="com.github.xepozz.gitattributes.ide.AttributesRunCommandMarkerContributor"/>-->
-        <!--        <lang.foldingBuilder-->
-        <!--                language="Gitattributes"-->
-        <!--                implementationClass="com.github.xepozz.gitattributes.ide.CronScheduleFoldingBuilder"/>-->
+        <codeInsight.lineMarkerProvider
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.ide.AttributesLineMarkerProvider"/>
         <lang.commenter
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.ide.AttributesCommenter"/>
