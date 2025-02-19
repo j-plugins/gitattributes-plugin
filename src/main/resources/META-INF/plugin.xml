@@ -31,9 +31,9 @@
         <!--        <lang.psiStructureViewFactory-->
         <!--                language="Gitattributes"-->
         <!--                implementationClass="com.github.xepozz.gitattributes.ide.structureView.AttributesStructureViewFactory"/>-->
-        <!--        <lang.documentationProvider-->
-        <!--                language="Gitattributes"-->
-        <!--                implementationClass="com.github.xepozz.gitattributes.ide.documentation.AttributesDocumentationProvider"/>-->
+        <lang.documentationProvider
+                language="Gitattributes"
+                implementationClass="com.github.xepozz.gitattributes.ide.documentation.AttributesDocumentationProvider"/>
         <codeInsight.lineMarkerProvider
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.ide.AttributesLineMarkerProvider"/>
@@ -46,6 +46,7 @@
         <psi.referenceContributor
                 language="Gitattributes"
                 implementation="com.github.xepozz.gitattributes.ide.reference.AttributesReferenceContributor"/>
+
         <!--        <localInspection-->
         <!--                language="Gitattributes" enabledByDefault="true" level="ERROR"-->
         <!--                groupName="Gitattributes schedule" displayName="Gitattributes schedule"-->
