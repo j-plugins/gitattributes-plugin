@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## [2025.0.6] - 2025-02-19
+
+- feat: add direct files reference
+- feat: files autocompletion
+
 ## [2025.0.5] - 2025-02-17
 
 - feat: basic attributes autocompletion
