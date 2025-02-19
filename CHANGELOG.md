@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [2025.0.7] - 2025-02-21
+
+- feat: add direct files reference
+- feat: files autocompletion
+- feat: file icon provider
+
 ## [2025.0.6] - 2025-02-19
 
 - feat: add direct files reference
