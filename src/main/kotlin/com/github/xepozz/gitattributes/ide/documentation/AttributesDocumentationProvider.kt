@@ -1,14 +1,10 @@
 package com.github.xepozz.gitattributes.ide.documentation
 
-import com.github.xepozz.crontab.ide.documentation.AttributesDocumentationUtils
 import com.github.xepozz.gitattributes.language.AttributesFile
 import com.github.xepozz.gitattributes.language.psi.AttributesDefinition
-import com.github.xepozz.gitattributes.language.psi.AttributesPattern
 import com.intellij.extapi.psi.ASTDelegatePsiElement
 import com.intellij.lang.ASTNode
-import com.intellij.lang.documentation.DocumentationMarkup
 import com.intellij.lang.documentation.DocumentationProvider
-import com.intellij.lang.documentation.QuickDocHighlightingHelper
 import com.intellij.markdown.utils.doc.DocMarkdownToHtmlConverter
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -17,7 +13,6 @@ import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.presentation.java.SymbolPresentationUtil
 import com.intellij.psi.util.PsiTreeUtil
 import java.util.function.Consumer
 
@@ -49,10 +44,25 @@ class AttributesDocumentationProvider : DocumentationProvider {
 
     override fun generateRenderedDoc(comment: PsiDocCommentBase) = markdownToHtml(comment.text, comment.project)
 
-    fun markdownToHtml(string: String, project: Project) = string
-        .split("\n")
-        .joinToString("\n") { it.replaceFirst(Regex("#+\\s+"), "") }
-        .let { DocMarkdownToHtmlConverter.convert(project, it) }
+    fun markdownToHtml(string: String, project: Project): String {
+        val markdownText = string
+            .split("\n")
+            .joinToString("\n") { it.replaceFirst(Regex("#+\\s+"), "") }
+
+        return try {
+            // Dynamically find the class
+            val clazz = Class.forName("com.intellij.markdown.utils.doc.DocMarkdownToHtmlConverter")
+
+            // Find the 'convert' method (assuming it's `static fun convert(project, text)`)
+            val method = clazz.getMethod("convert", Project::class.java, String::class.java)
+
+            // Invoke the static method
+            method.invoke(null, project, markdownText) as String
+        } catch (e: ClassNotFoundException) {
+//            println("Markdown converter not available, returning plain text.")
+            markdownText
+        }
+    }
 
     override fun findDocComment(file: PsiFile, range: TextRange): PsiDocCommentBase? {
         val element = file.findElementAt(range.startOffset) as? PsiComment ?: return null
