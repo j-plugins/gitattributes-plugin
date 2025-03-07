@@ -1,6 +1,5 @@
 package com.github.xepozz.gitattributes.language.psi.impl
 
-import com.github.xepozz.gitattributes.language.psi.AttributesAttribute
 import com.github.xepozz.gitattributes.language.psi.AttributesPattern
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.icons.AllIcons

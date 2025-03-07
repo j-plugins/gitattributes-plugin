@@ -25,7 +25,7 @@ class AttributesAnnotator : Annotator {
                     .textAttributes(PARAMETERS_HIGHLIGHT)
                     .create()
             }
-//
+
 //            is GitattributesVariableValue -> {
 //                holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
 //                    .range(element.textRange)

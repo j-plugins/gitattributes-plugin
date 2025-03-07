@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-## [2025.0.9] - 2025-03-03
+## [2025.0.10] - 2025-03-07
 
 - feat: add documentation builder (comments folder)
 
