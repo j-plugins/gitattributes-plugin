@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [2025.0.11] - 2025-03-08
+
+- fix: accessing field by not obfuscated name 
+
 ## [2025.0.10] - 2025-03-07
 
 - feat: add documentation builder (comments folder)

@@ -12,7 +12,6 @@
         <fileType
                 name="Git Attributes File"
                 implementationClass="com.github.xepozz.gitattributes.language.AttributesFileType"
-                fieldName="INSTANCE"
                 language="Gitattributes"
                 extensions="gitattributes"
                 fileNamesCaseInsensitive=".gitattributes"/>
