@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-## [2025.0.11] - 2025-03-08
+## [2025.0.12] - 2025-03-15
 
 - fix: accessing field by not obfuscated name 
 
