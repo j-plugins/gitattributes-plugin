@@ -6,7 +6,7 @@
 
 ## [2025.0.13] - 2025-03-20
 
-- fix: accessing field by not obfuscated name 
+- fix: accessing field by not obfuscated name
 
 ## [2025.0.10] - 2025-03-07
 
@@ -40,8 +40,3 @@
 ## [2025.0.1] - 2025-02-0
 
 - feat: token highlighting
-
-[Unreleased]: https://github.com/xepozz/gitattributes-plugin/compare/v2025.0.5...HEAD
-[2025.0.5]: https://github.com/xepozz/gitattributes-plugin/compare/v2025.0.4...v2025.0.5
-[2025.0.4]: https://github.com/xepozz/gitattributes-plugin/compare/v2025.0.1...v2025.0.4
-[2025.0.1]: https://github.com/xepozz/gitattributes-plugin/commits/v2025.0.1
