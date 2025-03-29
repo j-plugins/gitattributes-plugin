@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [2025.0.14] - 2025-03-29
+
+- enh: update deps
+
 ## [2025.0.13] - 2025-03-20
 
 - fix: accessing field by not obfuscated name
