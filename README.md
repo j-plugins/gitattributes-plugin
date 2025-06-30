@@ -10,6 +10,8 @@
 
 .gitattributes syntax support:
 
+[Github](https://github.com/xepozz/gitattributes-idea-plugin) | [Telegram](https://t.me/jb_plugins/3) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
+
 - syntax highlighting
 - keywords autocompletion
 - patterns matching
