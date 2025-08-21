@@ -1,6 +1,6 @@
 # .gitattributes
 
-![Build](https://github.com/xepozz/gitattributes-plugin/workflows/Build/badge.svg)
+![Build](https://github.com/j-plugins/gitattributes-plugin/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/26477--gitattributes-support.svg)](https://plugins.jetbrains.com/plugin/26477--gitattributes-support)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/26477--gitattributes-support.svg)](https://plugins.jetbrains.com/plugin/26477--gitattributes-support)
 
@@ -10,7 +10,7 @@
 
 .gitattributes syntax support:
 
-[Github](https://github.com/xepozz/gitattributes-idea-plugin) | [Telegram](https://t.me/jb_plugins/3) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
+[Github](https://github.com/j-plugins/gitattributes-plugin) | [Telegram](https://t.me/jb_plugins/3) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
 
 - syntax highlighting
 - keywords autocompletion
