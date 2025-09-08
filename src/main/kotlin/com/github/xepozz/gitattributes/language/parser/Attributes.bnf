@@ -19,8 +19,6 @@ attributesFile ::= item_*
 
 private item_ ::= (definition | COMMENT | EOL)
 
-COMMENT ::= SINGLE_COMMENT
-
 definition ::= pattern attributeList
 pattern ::= TEXT
 {
@@ -29,8 +27,11 @@ pattern ::= TEXT
     methods=[getReferences]
 }
 attributeList ::= attribute+
-attribute ::= DASH? TEXT (EQUALS_SIGN TEXT)?
+attribute ::= DASH? attribute_name (EQUALS_SIGN attribute_values)?
 {
     implements=["com.intellij.psi.NavigatablePsiElement"]
     extends="com.github.xepozz.gitattributes.language.psi.impl.AttributesAttributeBaseImpl"
 }
+attribute_name ::= TEXT
+attribute_values ::= attribute_value (COMMA attribute_value)*
+attribute_value ::= TEXT (EQUALS_SIGN TEXT)?

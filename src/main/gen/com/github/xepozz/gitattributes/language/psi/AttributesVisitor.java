@@ -8,15 +8,23 @@ import com.intellij.psi.NavigatablePsiElement;
 
 public class AttributesVisitor extends PsiElementVisitor {
 
-  public void visitComment(@NotNull AttributesComment o) {
-    visitPsiElement(o);
-  }
-
   public void visitAttribute(@NotNull AttributesAttribute o) {
     visitNavigatablePsiElement(o);
   }
 
   public void visitAttributeList(@NotNull AttributesAttributeList o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeName(@NotNull AttributesAttributeName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeValue(@NotNull AttributesAttributeValue o) {
+    visitPsiElement(o);
+  }
+
+  public void visitAttributeValues(@NotNull AttributesAttributeValues o) {
     visitPsiElement(o);
   }
 

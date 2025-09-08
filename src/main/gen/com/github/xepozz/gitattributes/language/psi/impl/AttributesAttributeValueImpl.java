@@ -11,14 +11,14 @@ import static com.github.xepozz.gitattributes.language.psi.AttributesTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.gitattributes.language.psi.*;
 
-public class AttributesCommentImpl extends ASTWrapperPsiElement implements AttributesComment {
+public class AttributesAttributeValueImpl extends ASTWrapperPsiElement implements AttributesAttributeValue {
 
-  public AttributesCommentImpl(@NotNull ASTNode node) {
+  public AttributesAttributeValueImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull AttributesVisitor visitor) {
-    visitor.visitComment(this);
+    visitor.visitAttributeValue(this);
   }
 
   @Override

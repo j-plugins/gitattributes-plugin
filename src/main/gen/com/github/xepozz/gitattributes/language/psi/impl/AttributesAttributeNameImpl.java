@@ -8,34 +8,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.xepozz.gitattributes.language.psi.AttributesTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.gitattributes.language.psi.*;
 
-public class AttributesAttributeImpl extends AttributesAttributeBaseImpl implements AttributesAttribute {
+public class AttributesAttributeNameImpl extends ASTWrapperPsiElement implements AttributesAttributeName {
 
-  public AttributesAttributeImpl(@NotNull ASTNode node) {
+  public AttributesAttributeNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull AttributesVisitor visitor) {
-    visitor.visitAttribute(this);
+    visitor.visitAttributeName(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof AttributesVisitor) accept((AttributesVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public AttributesAttributeName getAttributeName() {
-    return findNotNullChildByClass(AttributesAttributeName.class);
-  }
-
-  @Override
-  @Nullable
-  public AttributesAttributeValues getAttributeValues() {
-    return findChildByClass(AttributesAttributeValues.class);
   }
 
 }

@@ -10,14 +10,17 @@ public interface AttributesTypes {
 
   IElementType ATTRIBUTE = new AttributesElementType("ATTRIBUTE");
   IElementType ATTRIBUTE_LIST = new AttributesElementType("ATTRIBUTE_LIST");
-  IElementType COMMENT = new AttributesElementType("COMMENT");
+  IElementType ATTRIBUTE_NAME = new AttributesElementType("ATTRIBUTE_NAME");
+  IElementType ATTRIBUTE_VALUE = new AttributesElementType("ATTRIBUTE_VALUE");
+  IElementType ATTRIBUTE_VALUES = new AttributesElementType("ATTRIBUTE_VALUES");
   IElementType DEFINITION = new AttributesElementType("DEFINITION");
   IElementType PATTERN = new AttributesElementType("PATTERN");
 
+  IElementType COMMA = new AttributesTokenType("COMMA");
+  IElementType COMMENT = new AttributesTokenType("COMMENT");
   IElementType DASH = new AttributesTokenType("DASH");
   IElementType EOL = new AttributesTokenType("EOL");
   IElementType EQUALS_SIGN = new AttributesTokenType("EQUALS_SIGN");
-  IElementType SINGLE_COMMENT = new AttributesTokenType("SINGLE_COMMENT");
   IElementType TEXT = new AttributesTokenType("TEXT");
 
   class Factory {
@@ -29,8 +32,14 @@ public interface AttributesTypes {
       else if (type == ATTRIBUTE_LIST) {
         return new AttributesAttributeListImpl(node);
       }
-      else if (type == COMMENT) {
-        return new AttributesCommentImpl(node);
+      else if (type == ATTRIBUTE_NAME) {
+        return new AttributesAttributeNameImpl(node);
+      }
+      else if (type == ATTRIBUTE_VALUE) {
+        return new AttributesAttributeValueImpl(node);
+      }
+      else if (type == ATTRIBUTE_VALUES) {
+        return new AttributesAttributeValuesImpl(node);
       }
       else if (type == DEFINITION) {
         return new AttributesDefinitionImpl(node);

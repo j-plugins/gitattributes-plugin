@@ -5,7 +5,6 @@ import com.github.xepozz.gitattributes.language.psi.AttributesDefinition
 import com.intellij.extapi.psi.ASTDelegatePsiElement
 import com.intellij.lang.ASTNode
 import com.intellij.lang.documentation.DocumentationProvider
-import com.intellij.markdown.utils.doc.DocMarkdownToHtmlConverter
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
@@ -77,9 +76,7 @@ class AttributesDocumentationProvider : DocumentationProvider {
             addAll(PsiTreeUtil.findChildrenOfType(file, AttributesDefinition::class.java))
         }
             .forEach { expression ->
-                println("comments for $expression")
                 val comment = AttributesDocumentationUtils.findContextualDocumentationElement(expression) ?: return@forEach
-                println("$comment for $expression")
                 sink.accept(object : PsiCommentDelegate(comment), PsiDocCommentBase {
                     override fun getOwner() = expression
                 })

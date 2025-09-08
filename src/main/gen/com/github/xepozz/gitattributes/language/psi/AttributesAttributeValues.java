@@ -4,14 +4,10 @@ package com.github.xepozz.gitattributes.language.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.NavigatablePsiElement;
 
-public interface AttributesAttribute extends NavigatablePsiElement {
+public interface AttributesAttributeValues extends PsiElement {
 
   @NotNull
-  AttributesAttributeName getAttributeName();
-
-  @Nullable
-  AttributesAttributeValues getAttributeValues();
+  List<AttributesAttributeValue> getAttributeValueList();
 
 }
