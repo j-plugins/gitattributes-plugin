@@ -184,12 +184,22 @@ public class AttributesParser implements PsiParser, LightPsiParser {
   // pattern attributeList
   public static boolean definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "definition")) return false;
-    if (!nextTokenIs(b, TEXT)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, DEFINITION, "<definition>");
     r = pattern(b, l + 1);
     r = r && attributeList(b, l + 1);
-    exit_section_(b, m, DEFINITION, r);
+    exit_section_(b, l, m, r, false, AttributesParser::definition_recover);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !(EOL)
+  static boolean definition_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !consumeToken(b, EOL);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -198,9 +208,11 @@ public class AttributesParser implements PsiParser, LightPsiParser {
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = definition(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT);
     if (!r) r = consumeToken(b, EOL);
+    exit_section_(b, m, null, r);
     return r;
   }
 

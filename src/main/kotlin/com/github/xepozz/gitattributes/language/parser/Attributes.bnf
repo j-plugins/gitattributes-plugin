@@ -20,6 +20,11 @@ attributesFile ::= item_*
 private item_ ::= (definition | COMMENT | EOL)
 
 definition ::= pattern attributeList
+{
+    recoverWhile=definition_recover
+}
+private definition_recover ::= !(EOL)
+
 pattern ::= TEXT
 {
     implements=["com.intellij.psi.NavigatablePsiElement"]
