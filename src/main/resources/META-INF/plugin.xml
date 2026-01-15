@@ -56,5 +56,7 @@
         <!--            <className>com.github.xepozz.gitattributes.ide.actions.AttributesGuruIntention</className>-->
         <!--            <category>Gitattributes intentions</category>-->
         <!--        </intentionAction>-->
+        <editorNotificationProvider
+                implementation="com.github.xepozz.gitattributes.ide.editor.EditorNotificationProvider"/>
     </extensions>
 </idea-plugin>
