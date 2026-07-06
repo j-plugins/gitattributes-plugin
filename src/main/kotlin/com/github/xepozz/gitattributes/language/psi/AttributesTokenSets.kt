@@ -4,6 +4,6 @@ import com.intellij.psi.tree.TokenSet
 
 object AttributesTokenSets {
     val COMMENTS = TokenSet.create(AttributesTypes.COMMENT)
-    val STRING_LITERALS = TokenSet.create(AttributesTypes.PATTERN)
+    val STRING_LITERALS = TokenSet.EMPTY
     val WHITESPACES = TokenSet.WHITE_SPACE
 }

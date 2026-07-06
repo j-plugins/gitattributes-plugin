@@ -24,9 +24,6 @@
         <annotator
                 language="Gitattributes"
                 implementationClass="com.github.xepozz.gitattributes.language.AttributesAnnotator"/>
-        <multiHostInjector
-                implementation="com.github.xepozz.gitattributes.language.AttributesLanguageInjector"/>
-
         <!--        <lang.psiStructureViewFactory-->
         <!--                language="Gitattributes"-->
         <!--                implementationClass="com.github.xepozz.gitattributes.ide.structureView.AttributesStructureViewFactory"/>-->

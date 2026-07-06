@@ -13,27 +13,14 @@ class AttributesSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer() = AttributesLexerAdapter()
 
     override fun getTokenHighlights(tokenType: IElementType) = when (tokenType) {
-//        GitattributesTypes.SCHEDULE -> COMMENT_KEYS
-//        GitattributesTypes.TIME_POINTER -> CONSTANT_KEYS
-//        GitattributesTypes.COMMAND -> KEYWORD_KEYS
-//        GitattributesTypes.EQUAL_SIGN -> OPERATION_KEYS
-
         AttributesTypes.COMMENT -> COMMENT_KEYS
         TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
         else -> EMPTY_KEYS
     }
 
     companion object {
-        private val BAD_CHAR_KEYS = arrayOf(
-            HighlighterColors.BAD_CHARACTER,
-        )
-
-        private val COMMENT_KEYS = arrayOf(
-            DefaultLanguageHighlighterColors.DOC_COMMENT
-        )
-        private val OPERATION_KEYS = arrayOf(
-            DefaultLanguageHighlighterColors.OPERATION_SIGN
-        )
+        private val BAD_CHAR_KEYS = arrayOf(HighlighterColors.BAD_CHARACTER)
+        private val COMMENT_KEYS = arrayOf(DefaultLanguageHighlighterColors.LINE_COMMENT)
         private val EMPTY_KEYS = emptyArray<TextAttributesKey>()
     }
 }

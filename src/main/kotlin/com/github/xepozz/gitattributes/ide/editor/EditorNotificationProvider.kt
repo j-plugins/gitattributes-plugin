@@ -3,7 +3,6 @@ package com.github.xepozz.gitattributes.ide.editor
 import com.github.xepozz.gitattributes.language.AttributesFileType
 import com.intellij.ide.BrowserUtil
 import com.intellij.ide.util.PropertiesComponent
-import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.fileEditor.FileEditor
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
@@ -33,7 +32,6 @@ class EditorNotificationProvider : EditorNotificationProvider, DumbAware {
                 updateProperty(project)
             }
             panel.setCloseAction {
-                thisLogger().info("Close action clicked")
                 updateProperty(project)
             }
             panel

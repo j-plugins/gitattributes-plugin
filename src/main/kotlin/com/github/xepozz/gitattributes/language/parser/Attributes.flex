@@ -14,24 +14,29 @@ import com.intellij.psi.TokenType;
 %eof{  return;
 %eof}
 
-SINGLE_COMMENT=#[^\n]*
+SINGLE_COMMENT=#[^\r\n]*
 
 NUMBER=[0-9]+
 WHITESPACE=[ \t]+
 DASH="-"
 COMMA=","
 EQUALS_SIGN="="
-NEWLINE=\r|\n|\r\n
+NEWLINE=\r\n|\r|\n
 
-TEXT=(\\\s|[^\s])+
+QUOTED_PATTERN=\"([^\"\\\r\n]|\\[^\r\n])*(\"?)
+TEXT=(\\[^\r\n]|[^ \t\r\n])+
+ATTRIBUTE_TEXT=[^\-\s\=\n\r,][^\s\=\n\r,]*
+ATTRIBUTE_VALUE_TEXT=[^\s\=\n\r,]+
 
-%state PATTERN, ATTRIBUTES
+%state PATTERN, ATTRIBUTES, ATTRIBUTE_VALUES
 %%
 <YYINITIAL> {
-    {SINGLE_COMMENT}({NEWLINE}{SINGLE_COMMENT})* { return AttributesTypes.COMMENT; }
-    {TEXT}                                       { yypushback(0); yybegin(PATTERN); return AttributesTypes.TEXT; }
+    {SINGLE_COMMENT}                             { return AttributesTypes.COMMENT; }
+    {QUOTED_PATTERN}                             { yybegin(PATTERN); return AttributesTypes.TEXT; }
+    {TEXT}                                       { yybegin(PATTERN); return AttributesTypes.TEXT; }
 }
 <PATTERN> {
+    {QUOTED_PATTERN}                             { return AttributesTypes.TEXT; }
     {TEXT}                                       { return AttributesTypes.TEXT; }
     {WHITESPACE}                                 { yybegin(ATTRIBUTES); return TokenType.WHITE_SPACE; }
 }
@@ -39,8 +44,15 @@ TEXT=(\\\s|[^\s])+
 <ATTRIBUTES> {
     {DASH}                                       { return AttributesTypes.DASH; }
     {COMMA}                                      { return AttributesTypes.COMMA; }
+    {EQUALS_SIGN}                                { yybegin(ATTRIBUTE_VALUES); return AttributesTypes.EQUALS_SIGN; }
+    {ATTRIBUTE_TEXT}                             { return AttributesTypes.TEXT; }
+}
+
+<ATTRIBUTE_VALUES> {
+    {WHITESPACE}                                 { yybegin(ATTRIBUTES); return TokenType.WHITE_SPACE; }
+    {COMMA}                                      { return AttributesTypes.COMMA; }
     {EQUALS_SIGN}                                { return AttributesTypes.EQUALS_SIGN; }
-    [^\-\s\=\n,][^\s\=\n,]*                      { return AttributesTypes.TEXT; }
+    {ATTRIBUTE_VALUE_TEXT}                       { yybegin(ATTRIBUTES); return AttributesTypes.TEXT; }
 }
 
 

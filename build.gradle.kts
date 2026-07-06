@@ -1,8 +1,6 @@
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
-fun prop(name: String) = providers.gradleProperty(name).get()
-
 plugins {
     id("java") // Java support
     alias(libs.plugins.kotlin) // Kotlin support
@@ -23,7 +21,7 @@ sourceSets {
 }
 // Set the JVM language level used to build the project.
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 // Configure project's dependencies
@@ -45,16 +43,21 @@ dependencies {
         create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
 
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
-        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
+        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map(::splitPluginList))
 
         // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
-        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
+        plugins(providers.gradleProperty("platformPlugins").map(::splitPluginList))
 
         pluginVerifier()
         zipSigner()
         testFramework(TestFrameworkType.Platform)
     }
 }
+
+fun splitPluginList(value: String) = value
+    .split(',')
+    .map { it.trim() }
+    .filter { it.isNotEmpty() }
 
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html
 intellijPlatform {

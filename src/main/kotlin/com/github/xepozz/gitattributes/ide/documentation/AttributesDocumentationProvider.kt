@@ -16,12 +16,6 @@ import com.intellij.psi.util.PsiTreeUtil
 import java.util.function.Consumer
 
 class AttributesDocumentationProvider : DocumentationProvider {
-    override fun getUrlFor(element: PsiElement?, originalElement: PsiElement?): List<String>? {
-//        if (element !is AttributesSchedule) return null
-//        return listOf(AttributesGuruUtils.generateCrontabGuruUrl(element))
-        return null
-    }
-
     override fun getCustomDocumentationElement(
         editor: Editor,
         file: PsiFile,
@@ -30,35 +24,35 @@ class AttributesDocumentationProvider : DocumentationProvider {
     ): PsiElement? {
         if (file !is AttributesFile) return null
 
-        return PsiTreeUtil.findFirstParent(contextElement) { it is AttributesDefinition }
+        return PsiTreeUtil.getParentOfType(contextElement, AttributesDefinition::class.java, false)
     }
 
-    /**
-     * Extracts the key, value, file and documentation comment of a Simple key/value entry and returns
-     * a formatted representation of the information.
-     */
-    override fun generateDoc(element: PsiElement?, originalElement: PsiElement?): String? = null
+    override fun generateDoc(element: PsiElement?, originalElement: PsiElement?): String? {
+        val comment = when (element) {
+            is PsiComment -> element
+            else -> AttributesDocumentationUtils.findContextualDocumentationElement(element)
+        } ?: return null
+
+        return markdownToHtml(comment.text, comment.project)
+    }
 
     override fun getQuickNavigateInfo(element: PsiElement?, originalElement: PsiElement?): String? = null
 
     override fun generateRenderedDoc(comment: PsiDocCommentBase) = markdownToHtml(comment.text, comment.project)
 
-    fun markdownToHtml(string: String, project: Project): String {
+    private fun markdownToHtml(string: String, project: Project): String {
         val markdownText = string
             .split("\n")
-            .joinToString("\n") { it.replaceFirst(Regex("#+\\s+"), "") }
+            .joinToString("\n") { it.replaceFirst(Regex("^#+\\s*"), "") }
 
         return try {
-            // Dynamically find the class
             val clazz = Class.forName("com.intellij.markdown.utils.doc.DocMarkdownToHtmlConverter")
-
-            // Find the 'convert' method (assuming it's `static fun convert(project, text)`)
             val method = clazz.getMethod("convert", Project::class.java, String::class.java)
 
-            // Invoke the static method
             method.invoke(null, project, markdownText) as String
-        } catch (e: ClassNotFoundException) {
-//            println("Markdown converter not available, returning plain text.")
+        } catch (_: ReflectiveOperationException) {
+            markdownText
+        } catch (_: ClassCastException) {
             markdownText
         }
     }
@@ -72,9 +66,7 @@ class AttributesDocumentationProvider : DocumentationProvider {
     }
 
     override fun collectDocComments(file: PsiFile, sink: Consumer<in PsiDocCommentBase>) {
-        buildList {
-            addAll(PsiTreeUtil.findChildrenOfType(file, AttributesDefinition::class.java))
-        }
+        PsiTreeUtil.findChildrenOfType(file, AttributesDefinition::class.java)
             .forEach { expression ->
                 val comment = AttributesDocumentationUtils.findContextualDocumentationElement(expression) ?: return@forEach
                 sink.accept(object : PsiCommentDelegate(comment), PsiDocCommentBase {
@@ -87,7 +79,7 @@ class AttributesDocumentationProvider : DocumentationProvider {
         generateDoc(element, originalElement)
 }
 
-open class PsiCommentDelegate(val myComment: PsiComment) : PsiComment, ASTDelegatePsiElement() {
+private open class PsiCommentDelegate(private val myComment: PsiComment) : PsiComment, ASTDelegatePsiElement() {
     override fun getTokenType() = myComment.tokenType
 
     override fun getParent(): PsiElement? = myComment.parent

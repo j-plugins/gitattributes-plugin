@@ -36,7 +36,7 @@ public class AttributesParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DASH? attribute_name (EQUALS_SIGN attribute_values)?
+  // DASH? attribute_name (EQUALS_SIGN attribute_values?)?
   public static boolean attribute(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attribute")) return false;
     if (!nextTokenIs(b, "<attribute>", DASH, TEXT)) return false;
@@ -56,22 +56,34 @@ public class AttributesParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (EQUALS_SIGN attribute_values)?
+  // (EQUALS_SIGN attribute_values?)?
   private static boolean attribute_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attribute_2")) return false;
     attribute_2_0(b, l + 1);
     return true;
   }
 
-  // EQUALS_SIGN attribute_values
+  // EQUALS_SIGN attribute_values?
   private static boolean attribute_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "attribute_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
+    int equalsStart = b.getCurrentOffset();
     r = consumeToken(b, EQUALS_SIGN);
-    r = r && attribute_values(b, l + 1);
+    if (r) {
+      r = attribute_2_0_1(b, l + 1, equalsStart);
+    }
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // attribute_values?
+  private static boolean attribute_2_0_1(PsiBuilder b, int l, int equalsStart) {
+    if (!recursion_guard_(b, l, "attribute_2_0_1")) return false;
+    if (b.getCurrentOffset() == equalsStart + 1) {
+      attribute_values(b, l + 1);
+    }
+    return true;
   }
 
   /* ********************************************************** */

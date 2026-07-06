@@ -8,7 +8,7 @@ import com.intellij.psi.util.elementType
 
 object AttributesDocumentationUtils {
     fun findCrontabElementDocumentation(element: PsiElement?): String =
-        findContextualDocumentationElement(element)?.text?.replaceFirst("[# ]+", "") ?: ""
+        findContextualDocumentationElement(element)?.text?.replaceFirst(Regex("^#+\\s*"), "") ?: ""
 
     fun findContextualDocumentationElement(element: PsiElement?): PsiComment? {
         if (element == null) return null
